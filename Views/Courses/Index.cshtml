@@ -1,0 +1,44 @@
+﻿@model IEnumerable<StudentsDB.Models.Courses>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Courses</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th> <a asp-action="Create">New Course</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<StudentsDB.Models.Address>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Addresses</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Addr)
+                </th>
+                <th> <a asp-action="Create">New Address</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Addr)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.AddrId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.AddrId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.AddrId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
